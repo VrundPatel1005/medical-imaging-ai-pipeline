@@ -1,0 +1,21 @@
+.DS_Store
+.venv/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# Medical datasets are large and may include sensitive data.
+data/raw/*
+data/processed/*
+data/outputs/*
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+!data/outputs/.gitkeep
+
+# Local model weights and generated meshes/screenshots.
+models/*
+!models/.gitkeep
+*.stl
+*.obj
+*.ply
+
