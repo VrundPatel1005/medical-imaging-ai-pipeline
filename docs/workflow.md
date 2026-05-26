@@ -65,7 +65,7 @@ Official segmentation docs: https://slicer.readthedocs.io/en/latest/user_guide/i
 2. Open **Segmentations** module.
 3. Use **Export to files**.
 4. Choose STL or OBJ.
-5. Save the mesh into `data/outputs/` or `screenshots/` for portfolio review.
+5. Save the mesh into `data/outputs/` or `screenshots/` for project review.
 
 ## ITK-SNAP Walkthrough
 
@@ -145,4 +145,3 @@ Capture:
 - Exported STL model in a 3D viewer.
 
 These screenshots become the visual proof that you completed the workflow.
-

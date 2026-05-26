@@ -28,6 +28,7 @@ def mask_stats(mask, spacing_zyx: tuple[float, float, float]) -> dict[str, objec
     from skimage import measure
 
     coords = np.argwhere(mask > 0)
+    # Physical volume depends on voxel spacing; counting voxels alone is not enough.
     voxel_volume_mm3 = float(np.prod(spacing_zyx))
     stats: dict[str, object] = {
         "voxel_count": int(mask.sum()),
@@ -39,6 +40,7 @@ def mask_stats(mask, spacing_zyx: tuple[float, float, float]) -> dict[str, objec
         stats["bbox_min_zyx"] = [int(v) for v in coords.min(axis=0)]
         stats["bbox_max_zyx"] = [int(v) for v in coords.max(axis=0)]
         try:
+            # Marching cubes approximates the mask boundary as a triangle mesh for surface area.
             verts, faces, _, _ = measure.marching_cubes(mask.astype(np.float32), level=0.5, spacing=spacing_zyx)
             stats["surface_area_mm2"] = float(measure.mesh_surface_area(verts, faces))
         except ValueError:

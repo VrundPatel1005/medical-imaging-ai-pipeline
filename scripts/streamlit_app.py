@@ -24,7 +24,7 @@ def save_upload(uploaded_file) -> Path:
 
 st.set_page_config(page_title="Medical Segmentation Dashboard", layout="wide")
 st.title("AI-Assisted Medical Image Segmentation Dashboard")
-st.caption("Educational portfolio tool only. Not for diagnosis or clinical decision-making.")
+st.caption("Research prototype only. Not for diagnosis or clinical decision-making.")
 
 image_upload = st.sidebar.file_uploader("Upload image NIfTI", type=["nii", "gz"])
 mask_upload = st.sidebar.file_uploader("Upload mask NIfTI", type=["nii", "gz"])
@@ -37,6 +37,7 @@ else:
     image = image_volume.data
     mask = None
     if mask_upload:
+        # Masks are binary label volumes: 0 is background, nonzero voxels are anatomy.
         mask = binary_mask(load_volume(save_upload(mask_upload)).data)
         if mask.shape != image.shape:
             st.error(f"Image shape {image.shape} does not match mask shape {mask.shape}.")
@@ -50,6 +51,7 @@ else:
         fig, ax = plt.subplots(figsize=(7, 7))
         ax.imshow(normalize_for_display(image[slice_index]), cmap="gray")
         if mask is not None:
+            # Hide background labels so the CT remains grayscale and only anatomy is colored.
             overlay = np.ma.masked_where(mask[slice_index] == 0, mask[slice_index])
             ax.imshow(overlay, cmap="autumn", alpha=0.55)
         ax.axis("off")

@@ -1,8 +1,8 @@
 # AI-Assisted Medical Image Segmentation & 3D Reconstruction Pipeline
 
-Beginner-to-intermediate medical imaging portfolio project using 3D Slicer, ITK-SNAP, TotalSegmentator, MONAI, Python, DICOM, NIfTI, segmentation metrics, and 3D mesh export.
+Beginner-to-intermediate medical imaging project using 3D Slicer, ITK-SNAP, TotalSegmentator, MONAI, Python, DICOM, NIfTI, segmentation metrics, and 3D mesh export.
 
-> Educational and research portfolio project only. This repository is not intended for diagnosis, treatment planning, or clinical decision-making.
+> Research prototype only. This repository is not intended for diagnosis, treatment planning, or clinical decision-making.
 
 ## Project Objectives
 
@@ -12,7 +12,7 @@ Beginner-to-intermediate medical imaging portfolio project using 3D Slicer, ITK-
 - Visualize 2D slices, segmentation overlays, and output masks.
 - Export segmentation masks as STL/OBJ 3D anatomy models.
 - Compute beginner-friendly segmentation statistics and comparison metrics.
-- Document a complete workflow suitable for healthcare AI portfolio review.
+- Document a complete workflow suitable for healthcare AI and data operations review.
 
 ## Tools Used
 
@@ -76,7 +76,7 @@ data/raw/Task09_Spleen/
 ## Installation
 
 ```bash
-cd medical-imaging-ai-portfolio
+cd medical-imaging-ai-pipeline
 bash setup.sh
 source .venv/bin/activate
 ```
@@ -85,7 +85,7 @@ For full app walkthroughs, read:
 
 - `docs/installation.md`
 - `docs/workflow.md`
-- `docs/portfolio_notes.md`
+- `docs/project_notes.md`
 
 ## Quick Start With A NIfTI Scan
 
@@ -171,7 +171,7 @@ This is the AI-assisted part of the project: TotalSegmentator proposes anatomy m
 
 ## Screenshots To Add
 
-Place final portfolio images in `screenshots/`:
+Place final project images in `screenshots/`:
 
 - 3D Slicer DICOM browser or loaded CT volume.
 - 3D Slicer Segment Editor with manual mask.

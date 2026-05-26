@@ -1,10 +1,10 @@
-# Portfolio Notes
+# Project Notes
 
 Use this language honestly. The goal is to show practical exposure and learning, not to imply clinical deployment.
 
 ## LinkedIn Project Post
 
-I built a beginner-friendly medical imaging AI portfolio project: **AI-Assisted Medical Image Segmentation & 3D Reconstruction Pipeline**.
+I built a beginner-friendly medical imaging AI project: **AI-Assisted Medical Image Segmentation & 3D Reconstruction Pipeline**.
 
 The project walks through a full research-style workflow using open-source tools: 3D Slicer, ITK-SNAP, TotalSegmentator, MONAI/PyTorch, SimpleITK, nibabel, and Python.
 
@@ -28,11 +28,11 @@ Keywords: Medical Imaging, Healthcare AI, DICOM, NIfTI, 3D Slicer, ITK-SNAP, Tot
 - Used 3D Slicer, ITK-SNAP, and TotalSegmentator to practice manual, semi-automatic, and AI-assisted CT segmentation workflows on public medical imaging datasets.
 - Implemented segmentation quality analysis including voxel volume, surface area, Dice score, Jaccard score, centroid, and bounding-box statistics.
 - Created a Streamlit dashboard for interactive slice review, segmentation overlay inspection, and beginner-friendly metric reporting.
-- Documented a reproducible healthcare AI workflow with setup instructions, dataset guidance, troubleshooting, and portfolio-ready presentation materials.
+- Documented a reproducible healthcare AI workflow with setup instructions, dataset guidance, troubleshooting, and project presentation materials.
 
-## Portfolio Description
+## Project Description
 
-This project demonstrates an end-to-end medical imaging AI workflow for educational and research portfolio use. It combines open-source clinical imaging tools with Python automation to load CT/MRI scans, create and compare segmentation masks, generate overlays, compute metrics, and export 3D anatomical models. The project emphasizes practical familiarity with DICOM/NIfTI workflows, annotation tooling, AI-assisted segmentation, and quality-control concepts used in healthcare AI data operations.
+This project demonstrates an end-to-end medical imaging AI workflow for research-style practice. It combines open-source clinical imaging tools with Python automation to load CT/MRI scans, create and compare segmentation masks, generate overlays, compute metrics, and export 3D anatomical models. The project emphasizes practical familiarity with DICOM/NIfTI workflows, annotation tooling, AI-assisted segmentation, and quality-control concepts used in healthcare AI data operations.
 
 ## Short Elevator Pitch
 
@@ -43,7 +43,7 @@ I built a medical imaging AI pipeline that takes public CT/MRI scans from DICOM 
 Good wording:
 
 - "Practiced AI-assisted segmentation workflows using TotalSegmentator."
-- "Built a portfolio pipeline for medical image loading, visualization, metrics, and 3D export."
+- "Built a project pipeline for medical image loading, visualization, metrics, and 3D export."
 - "Gained hands-on exposure to 3D Slicer, ITK-SNAP, DICOM, NIfTI, and segmentation masks."
 
 Avoid overstating:
@@ -60,4 +60,3 @@ Avoid overstating:
 - "Python overlay showing mask alignment on axial CT slice."
 - "3D STL reconstruction exported from binary segmentation mask."
 - "Streamlit dashboard for slice review and segmentation metrics."
-

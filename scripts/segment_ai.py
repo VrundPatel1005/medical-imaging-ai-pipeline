@@ -46,6 +46,7 @@ def main() -> None:
     if args.fast:
         command.append("--fast")
     if args.cpu:
+        # CPU mode is slower, but it is the most reliable default for beginner laptops.
         command.append("--device")
         command.append("cpu")
 

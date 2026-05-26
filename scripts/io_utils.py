@@ -59,6 +59,7 @@ def load_volume(path: str | Path) -> Volume:
     if is_nifti(source):
         nii = nib.load(str(source))
         data_xyz = nii.get_fdata(dtype=np.float32)
+        # nibabel exposes NIfTI as x, y, z; the project uses z, y, x for slice-first workflows.
         data = np.transpose(data_xyz, (2, 1, 0))
         spacing_xyz = tuple(float(v) for v in nii.header.get_zooms()[:3])
         return Volume(data, nii.affine, spacing_xyz, source, "NIfTI")
@@ -84,6 +85,7 @@ def save_nifti(data_zyx: np.ndarray, reference: Volume, output_path: str | Path)
 
     output = Path(output_path).expanduser().resolve()
     output.parent.mkdir(parents=True, exist_ok=True)
+    # Convert back to x, y, z before writing so external tools read the file correctly.
     data_xyz = np.transpose(data_zyx, (2, 1, 0))
     img = nib.Nifti1Image(data_xyz.astype(np.float32), reference.affine)
     img.header.set_zooms(reference.spacing_xyz)
@@ -100,4 +102,3 @@ def center_slice_index(mask_or_image: np.ndarray) -> int:
     if nonzero.size == 0:
         return int(mask_or_image.shape[0] // 2)
     return int(np.median(nonzero[:, 0]))
-
