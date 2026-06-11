@@ -6,9 +6,10 @@ from __future__ import annotations
 import argparse
 from pathlib import Path
 
+import numpy as np
+
 
 def mask_to_mesh(mask, spacing_zyx: tuple[float, float, float]):
-    import numpy as np
     import trimesh
     from skimage import measure
 

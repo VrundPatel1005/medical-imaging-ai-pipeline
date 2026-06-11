@@ -6,10 +6,10 @@ from __future__ import annotations
 import argparse
 from pathlib import Path
 
+import numpy as np
+
 
 def normalize_for_display(image):
-    import numpy as np
-
     low, high = np.percentile(image, [1, 99])
     if high <= low:
         return np.zeros_like(image, dtype=np.float32)
@@ -29,7 +29,6 @@ def build_parser() -> argparse.ArgumentParser:
 def main() -> None:
     args = build_parser().parse_args()
     import matplotlib.pyplot as plt
-    import numpy as np
 
     from io_utils import binary_mask, center_slice_index, load_volume
 

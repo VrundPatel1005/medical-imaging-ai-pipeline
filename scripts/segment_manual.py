@@ -6,17 +6,15 @@ from __future__ import annotations
 import argparse
 from pathlib import Path
 
+import numpy as np
+import scipy.ndimage as ndi
+
 
 def threshold_mask(data, lower: float, upper: float):
-    import numpy as np
-
     return ((data >= lower) & (data <= upper)).astype(np.uint8)
 
 
 def largest_component(mask):
-    import numpy as np
-    import scipy.ndimage as ndi
-
     labels, count = ndi.label(mask)
     if count == 0:
         return mask.astype(np.uint8)
@@ -40,8 +38,6 @@ def build_parser() -> argparse.ArgumentParser:
 
 def main() -> None:
     args = build_parser().parse_args()
-    import scipy.ndimage as ndi
-
     from io_utils import load_volume, save_nifti
 
     volume = load_volume(args.input)

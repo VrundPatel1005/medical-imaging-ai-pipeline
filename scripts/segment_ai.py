@@ -23,6 +23,10 @@ def build_parser() -> argparse.ArgumentParser:
 
 def main() -> None:
     args = build_parser().parse_args()
+    if not args.preview and not args.input.exists():
+        print(f"Input scan does not exist: {args.input}", file=sys.stderr)
+        raise SystemExit(2)
+
     executable = shutil.which("TotalSegmentator")
     if executable is None:
         if args.preview:
