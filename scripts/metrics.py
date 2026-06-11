@@ -7,24 +7,41 @@ import argparse
 import json
 from pathlib import Path
 
+import numpy as np
+
+
+def _overlap_counts(a, b) -> tuple[int, int, int]:
+    """Return (intersection, |a|, |b|) in a single pass over the masks."""
+    a = np.asarray(a, dtype=bool)
+    b = np.asarray(b, dtype=bool)
+    inter = int(np.count_nonzero(a & b))
+    return inter, int(a.sum()), int(b.sum())
+
 
 def dice(a, b) -> float:
-    import numpy as np
-
-    inter = np.logical_and(a, b).sum()
-    denom = a.sum() + b.sum()
-    return 1.0 if denom == 0 else float(2 * inter / denom)
+    inter, sa, sb = _overlap_counts(a, b)
+    denom = sa + sb
+    return 1.0 if denom == 0 else 2.0 * inter / denom
 
 
 def jaccard(a, b) -> float:
-    import numpy as np
+    inter, sa, sb = _overlap_counts(a, b)
+    union = sa + sb - inter
+    return 1.0 if union == 0 else inter / union
 
-    union = np.logical_or(a, b).sum()
-    return 1.0 if union == 0 else float(np.logical_and(a, b).sum() / union)
+
+def compare(a, b) -> dict[str, float]:
+    """Dice and Jaccard from one shared overlap computation."""
+    inter, sa, sb = _overlap_counts(a, b)
+    denom = sa + sb
+    union = denom - inter
+    return {
+        "dice_score": 1.0 if denom == 0 else 2.0 * inter / denom,
+        "jaccard_score": 1.0 if union == 0 else inter / union,
+    }
 
 
 def mask_stats(mask, spacing_zyx: tuple[float, float, float]) -> dict[str, object]:
-    import numpy as np
     from skimage import measure
 
     coords = np.argwhere(mask > 0)
@@ -73,8 +90,7 @@ def main() -> None:
         ref = binary_mask(load_volume(args.reference).data)
         if ref.shape != pred.shape:
             raise ValueError(f"Shape mismatch: prediction {pred.shape}, reference {ref.shape}")
-        results["dice_score"] = dice(pred, ref)
-        results["jaccard_score"] = jaccard(pred, ref)
+        results.update(compare(pred, ref))
 
     text = json.dumps(results, indent=2)
     print(text)

@@ -87,6 +87,16 @@ For full app walkthroughs, read:
 - `docs/workflow.md`
 - `docs/project_notes.md`
 
+## Testing
+
+The segmentation metrics (Dice, Jaccard, mask statistics) are covered by unit
+tests that run on tiny in-memory arrays, so they need no dataset download:
+
+```bash
+pip install pytest
+pytest
+```
+
 ## Quick Start With A NIfTI Scan
 
 Inspect a scan:

@@ -6,10 +6,11 @@ from __future__ import annotations
 import argparse
 from pathlib import Path
 
+import numpy as np
+import scipy.ndimage as ndi
+
 
 def clip_and_normalize(data, lower: float, upper: float):
-    import numpy as np
-
     clipped = np.clip(data, lower, upper)
     denom = upper - lower
     if denom <= 0:
@@ -18,8 +19,6 @@ def clip_and_normalize(data, lower: float, upper: float):
 
 
 def resample(data, old_spacing_zyx: tuple[float, float, float], new_spacing_zyx: tuple[float, float, float]):
-    import scipy.ndimage as ndi
-
     zoom = tuple(old / new for old, new in zip(old_spacing_zyx, new_spacing_zyx))
     return ndi.zoom(data, zoom=zoom, order=1).astype(np.float32)
 

@@ -4,7 +4,10 @@
 from __future__ import annotations
 
 import argparse
+import shlex
 from pathlib import Path
+
+import numpy as np
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -17,10 +20,6 @@ def build_parser() -> argparse.ArgumentParser:
 
 def main() -> None:
     args = build_parser().parse_args()
-    import shlex
-
-    import numpy as np
-
     from io_utils import load_volume
 
     volume = load_volume(args.input)

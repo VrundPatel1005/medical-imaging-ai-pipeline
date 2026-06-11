@@ -10,7 +10,7 @@ import numpy as np
 import streamlit as st
 
 from io_utils import binary_mask, center_slice_index, load_volume
-from metrics import dice, jaccard, mask_stats
+from metrics import compare, mask_stats
 from visualize import normalize_for_display
 
 
@@ -68,7 +68,8 @@ else:
             if reference_upload:
                 ref = binary_mask(load_volume(save_upload(reference_upload)).data)
                 if ref.shape == mask.shape:
-                    st.metric("Dice", f"{dice(mask, ref):.4f}")
-                    st.metric("Jaccard", f"{jaccard(mask, ref):.4f}")
+                    scores = compare(mask, ref)
+                    st.metric("Dice", f"{scores['dice_score']:.4f}")
+                    st.metric("Jaccard", f"{scores['jaccard_score']:.4f}")
                 else:
                     st.warning("Reference mask shape does not match.")
